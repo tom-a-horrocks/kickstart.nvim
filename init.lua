@@ -713,7 +713,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -756,6 +756,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'ruff',
+        'isort',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1002,6 +1004,7 @@ require('lazy').setup({
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    { 'nvim-treesitter/nvim-treesitter-context', opts = { enable = true } },
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
