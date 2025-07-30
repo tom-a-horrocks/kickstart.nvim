@@ -793,6 +793,7 @@ require('lazy').setup({
       },
     },
     opts = {
+      -- log_level = vim.log.levels.DEBUG,
       notify_on_error = false,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -811,7 +812,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'ruff' },
+        python = { 'ruff_format', 'isort' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
