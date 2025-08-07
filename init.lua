@@ -199,6 +199,15 @@ vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
 vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
 vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
 
+-- Languages with enabled syntax formatting in markdown code blocks
+vim.g.markdown_fenced_languages = {
+  'python',
+  'sh',
+  'elm',
+  'html',
+  'powershell',
+}
+
 -- BASIC AUTOCOMMANDS
 --  See `:help lua-guide-autocommands`
 
