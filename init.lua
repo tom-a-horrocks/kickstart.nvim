@@ -205,7 +205,7 @@ vim.g.markdown_fenced_languages = {
   'sh',
   'elm',
   'html',
-  'powershell',
+  'bash',
 }
 
 -- BASIC AUTOCOMMANDS
