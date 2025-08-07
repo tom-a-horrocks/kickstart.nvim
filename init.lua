@@ -243,7 +243,73 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
-  'MeanderingProgrammer/render-markdown.nvim',
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown',
+    opts = {
+      completions = { blink = { enabled = true } },
+      indent = {
+        -- Mimic org-indent-mode behavior by indenting everything under a heading based on the
+        -- level of the heading. Indenting starts from level 2 headings onward by default.
+
+        -- Turn on / off org-indent-mode.
+        enabled = true,
+        -- Additional modes to render indents.
+        render_modes = false,
+        -- Amount of additional padding added for each heading level.
+        per_level = 4,
+        -- Heading levels <= this value will not be indented.
+        -- Use 0 to begin indenting from the very first level.
+        skip_level = 1,
+        -- Do not indent heading titles, only the body.
+        skip_heading = false,
+        -- Prefix added when indenting, one per level.
+        icon = '▎',
+        -- Priority to assign to extmarks.
+        priority = 0,
+        -- Applied to icon.
+        highlight = 'RenderMarkdownIndent',
+      },
+      code = {
+        enabled = true,
+        render_modes = false,
+        sign = false,
+        conceal_delimiters = true,
+        language = true,
+        position = 'left',
+        language_icon = true,
+        language_name = true,
+        language_info = true,
+        language_pad = 0,
+        disable_background = { 'diff' },
+        width = 'full',
+        left_margin = 0,
+        left_pad = 1,
+        right_pad = 0,
+        min_width = 0,
+        border = 'hide',
+        language_border = '█',
+        language_left = '',
+        language_right = '',
+        above = '▄',
+        below = '▀',
+        inline = true,
+        inline_left = '',
+        inline_right = '',
+        inline_pad = 0,
+        highlight = 'RenderMarkdownCode',
+        highlight_info = 'RenderMarkdownCodeInfo',
+        highlight_language = nil,
+        highlight_border = 'RenderMarkdownCodeBorder',
+        highlight_fallback = 'RenderMarkdownCodeFallback',
+        highlight_inline = 'RenderMarkdownCodeInline',
+        style = 'full',
+      },
+    },
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
