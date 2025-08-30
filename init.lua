@@ -304,9 +304,15 @@ require('lazy').setup({
       vim.keymap.set('n', '<C-l>', function()
         harpoon:list():select(3)
       end)
-      vim.keymap.set('n', '<C-;>', function()
-        harpoon:list():select(4)
-      end)
+      if os.getenv 'OS' == 'Windows_NT' then
+        vim.keymap.set('n', '<C-i>', function()
+          harpoon:list():select(4)
+        end)
+      else
+        vim.keymap.set('n', '<C-;>', function()
+          harpoon:list():select(4)
+        end)
+      end
 
       -- Toggle previous & next buffers stored within Harpoon list
       -- vim.keymap.set('n', '<C-S-P>', function()
