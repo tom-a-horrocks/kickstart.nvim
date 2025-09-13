@@ -665,6 +665,20 @@ require('lazy').setup({
           end
         end,
       })
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client == nil then
+            return
+          end
+          if client.name == 'ruff' then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
+        end,
+        desc = 'LSP: Disable hover capability from Ruff',
+      })
 
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
@@ -714,7 +728,15 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- Instructions for disabling ruff linting: https://github.com/astral-sh/ruff/issues/12795
-        basedpyright = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              -- Using Ruff's import organizer
+              disableOrganizeImports = true,
+            },
+          },
+        },
+        ruff = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -758,7 +780,6 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'ruff',
-        'isort',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -813,17 +834,19 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'ruff_format', 'isort' },
+        python = {
+          -- To fix auto-fixable lint errors.
+          'ruff_fix',
+          -- To run the Ruff formatter.
+          'ruff_format',
+          -- To organize the imports.
+          'ruff_organize_imports',
+        },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
-      formatters = {
-        isort = {
-          command = 'isort',
-          args = { '-' }, -- Required to avoid bug, see https://github.com/stevearc/conform.nvim/issues/423
-        },
-      },
+      formatters = {},
     },
   },
 
