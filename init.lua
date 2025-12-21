@@ -644,22 +644,25 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- Instructions for disabling ruff linting: https://github.com/astral-sh/ruff/issues/12795
-        basedpyright = {
-          settings = {
-            basedpyright = {
-              -- Using Ruff's import organizer
-              disableOrganizeImports = true,
-              disableTaggedHints = false,
-              analysis = {
-                -- this setting is only for import suggestion completions, which are displayed as you type. it does not affect import suggestion code actions, which are tied to the reportUndefinedVariable diagnostic rule. to disable those, you must disable the diagnostic rule itself.
-                autoImportCompletions = true,
-                -- The diagnosticSeverityOverrides are ignored... idk why. Use pyproject.toml instead.
-                -- diagnosticSeverityOverrides = { reportUnusedVariable = false },
-              },
-            },
-          },
+        ty = {
+          settings = { ty = {} },
         },
+        -- Instructions for disabling ruff linting: https://github.com/astral-sh/ruff/issues/12795
+        -- basedpyright = {
+        --   settings = {
+        --     basedpyright = {
+        --       -- Using Ruff's import organizer
+        --       disableOrganizeImports = true,
+        --       disableTaggedHints = false,
+        --       analysis = {
+        --         -- this setting is only for import suggestion completions, which are displayed as you type. it does not affect import suggestion code actions, which are tied to the reportUndefinedVariable diagnostic rule. to disable those, you must disable the diagnostic rule itself.
+        --         autoImportCompletions = true,
+        --         -- The diagnosticSeverityOverrides are ignored... idk why. Use pyproject.toml instead.
+        --         -- diagnosticSeverityOverrides = { reportUnusedVariable = false },
+        --       },
+        --     },
+        --   },
+        -- },
         ruff = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
