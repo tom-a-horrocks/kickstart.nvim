@@ -666,9 +666,9 @@ require('lazy').setup({
         ruff = {
           init_options = {
             settings = {
-              lint = { enable = true, preview = true },
-              showSyntaxErrors = true,
-              logLevel = 'trace',
+              lint = { enable = false },
+              -- showSyntaxErrors = true,
+              -- logLevel = 'trace',
             },
           },
         },
@@ -732,6 +732,10 @@ require('lazy').setup({
           end,
         },
       }
+      -- Necessary to enable config in mason v2, even though it's supplied to require('lspconfig') above.
+      for name, config in pairs(servers) do
+        vim.lsp.config(name, config)
+      end
     end,
   },
 
