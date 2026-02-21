@@ -667,6 +667,8 @@ require('lazy').setup({
           init_options = {
             settings = {
               lint = { enable = false },
+              organizeImports = false,
+              fixAll = false,
               -- showSyntaxErrors = true,
               -- logLevel = 'trace',
             },
@@ -693,6 +695,13 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {
+                  'vim',
+                  'require',
+                },
+              },
             },
           },
         },
