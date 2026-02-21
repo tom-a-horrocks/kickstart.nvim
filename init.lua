@@ -196,6 +196,11 @@ require('lazy').setup({
     },
   },
   {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
